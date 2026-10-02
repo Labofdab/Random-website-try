@@ -27,6 +27,7 @@
             padding: 2rem;
             text-align: center;
             border-bottom: 3px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         header h1 {
@@ -47,6 +48,7 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         nav a:hover {
@@ -77,6 +79,14 @@
             padding-bottom: 0.5rem;
         }
 
+        .date-tag {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
         .project-link {
             display: inline-block;
             background-color: var(--primary-color);
@@ -86,9 +96,15 @@
             border-radius: 4px;
             font-weight: bold;
             margin-top: 1rem;
+            transition: background 0.3s;
         }
 
-        .sidebar img {
+        .project-link:hover {
+            background-color: #5750d1;
+        }
+
+        /* Sidebar Styling */
+        .profile-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -98,6 +114,16 @@
             object-fit: cover;
         }
 
+        .sidebar {
+            text-align: center;
+        }
+
+        .sidebar p {
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -105,9 +131,85 @@
             color: #fff;
             margin-top: 2rem;
         }
+
+        /* Chatbot Styling */
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        
+        #chat-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        #chat-window {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 320px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #chat-messages {
+            height: 300px;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+        }
+
+        #send-btn {
+            padding: 12px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Welcome to My Blog</h1>
         <p>Documenting my coding journey and favorite interests.</p>
@@ -120,30 +222,36 @@
     </nav>
 
     <div class="container">
+        <!-- Main Blog Posts Area -->
         <main>
             <div class="card">
                 <h2>Learning Python and Building Bots</h2>
+                <span class="date-tag">September 2026</span>
                 <p>Recently, I started learning how to code by building a tracker that watches websites for event tickets and merchandise. Navigating HTML, CSS, and Python has been a huge learning curve, but seeing a script successfully scrape a website for the first time was incredibly rewarding.</p>
+                <p>Next up: refining the Python script so it can monitor store inventory around the clock!</p>
             </div>
 
             <div class="card">
                 <h2>Why I'm Tracking Conventions and Concerts</h2>
-                <p>Trying to get tickets to high-demand events is stressful. I decided to combine my new coding skills with my hobbies to build a custom alert system. Being the first to know when tickets drop makes a massive difference.</p>
+                <span class="date-tag">September 2026</span>
+                <p>Trying to get tickets to high-demand events is stressful. I decided to combine my new coding skills with my hobbies to build a custom alert system for events like Anime Expo and Miku Expo. Being the first to know when tickets drop makes a massive difference.</p>
             </div>
         </main>
 
+        <!-- Sidebar / About Me Area -->
         <aside>
             <div class="card sidebar">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                <!-- Change 'profile.jpg' to the actual name of your image file if you have one -->
+                <img src="profile.jpg" alt="Profile Picture" class="profile-img" onerror="this.src='https://via.placeholder.com/150'">
                 <h2>About Me</h2>
-                <p>Hi! I'm a beginner developer documenting my coding journey. I'm currently focused on building Discord bots and learning web development with Visual Studio Code.</p>
+                <p>Hi! I'm a student and self-taught developer. I believe the best way to learn to code is by building things you actually want to use.</p>
+                <p>Right now, my cousin and I are building a custom Python notification bot to track tickets and merch for Anime Expo, Hatsune Miku, Ado, and Pokémon.</p>
             </div>
 
             <div class="card">
-                <h2>My Projects</h2>
-                <p><strong>Event & Drop Tracker</strong></p>
-                <p>A custom notification system built to track ticket sales and limited merch drops.</p>
-                <!-- Remember to match this to your tracker file name -->
+                <h2>My Featured Project</h2>
+                <p><strong>Creating a website event reminder</strong></p>
+                <p style="font-size: 0.9rem; color: var(--text-light);">A web scraper and Discord bot that monitors high-demand storefronts and alerts me instantly.</p>
                 <a href="reminder.html" class="project-link">View Tracker Dashboard</a>
             </div>
         </aside>
@@ -152,5 +260,105 @@
     <footer>
         <p>© 2026 My Personal Blog. Built while learning to code.</p>
     </footer>
+
+    <!-- Chatbot HTML -->
+    <button id="chat-toggle">💬</button>
+
+    <div id="chat-window">
+        <div class="chat-header">My Personal Assistant</div>
+        <div id="chat-messages">
+            <div style="background-color: #eee; color: #333; padding: 10px 14px; border-radius: 15px; align-self: flex-start; font-size: 0.9rem; max-width: 80%;">
+                Hi! I'm a custom bot. Ask me about this website, my creator's hobbies, or the drop tracker!
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot Logic -->
+    <script>
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Toggle chat window
+        chatToggle.addEventListener('click', () => {
+            chatWindow.style.display = chatWindow.style.display === 'none' || chatWindow.style.display === '' ? 'block' : 'none';
+        });
+
+        // Pre-programmed bot responses based on your tracker project
+        const botResponses = {
+            "tracker": "The drop tracker is a custom script that monitors high-demand items like Pokémon cards and pings a private Discord server when they are in stock!",
+            "pokemon": "My creator hates paying scalper prices for Pokémon cards, so they built a web scraping bot to beat them to the checkout.",
+            "miku": "Hatsune Miku is one of the artists my creator tracks for upcoming concerts and merchandise drops.",
+            "ado": "We are keeping a close eye on Ado's tours and ticket drops so we don't miss out!",
+            "anime expo": "Anime Expo badges sell out incredibly fast, so the event tracker monitors their registration page for changes.",
+            "hello": "Hello there! Thanks for checking out the blog.",
+            "hi": "Hi! Let me know if you want to learn about my tracker, Pokémon, or Miku.",
+            "default": "I'm still learning! Try asking me about 'pokemon', 'miku', 'ado', or the 'tracker'."
+        };
+
+        function processMessage() {
+            const userText = chatInput.value.trim();
+            if (userText === '') return;
+
+            // Display User Message
+            addMessage(userText, true);
+            chatInput.value = '';
+
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Generate Bot Response
+            setTimeout(() => {
+                let response = botResponses["default"];
+                let lowerMessage = userText.toLowerCase();
+
+                for (let key in botResponses) {
+                    if (lowerMessage.includes(key)) {
+                        response = botResponses[key];
+                        break;
+                    }
+                }
+                addMessage(response, false);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500); // slight delay to feel like a real bot
+        }
+
+        function addMessage(text, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.textContent = text;
+            msgDiv.style.padding = '10px 14px';
+            msgDiv.style.borderRadius = '15px';
+            msgDiv.style.fontSize = '0.9rem';
+            msgDiv.style.maxWidth = '80%';
+            msgDiv.style.wordWrap = 'break-word';
+
+            if (isUser) {
+                msgDiv.style.backgroundColor = 'var(--primary-color)';
+                msgDiv.style.color = 'white';
+                msgDiv.style.alignSelf = 'flex-end';
+            } else {
+                msgDiv.style.backgroundColor = '#eee';
+                msgDiv.style.color = '#333';
+                msgDiv.style.alignSelf = 'flex-start';
+            }
+            chatMessages.appendChild(msgDiv);
+        }
+
+        // Allow pressing Enter to send
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                processMessage();
+            }
+        });
+
+        // Click to send
+        sendBtn.addEventListener('click', processMessage);
+    </script>
 </body>
 </html>
